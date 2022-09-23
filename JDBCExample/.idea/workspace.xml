@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea6dba85-d231-4857-af43-fc4a6e0e165f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/jdbc/sakila/dao/interfaces/DAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/jdbc/sakila/dao/sql/ActorDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/jdbc/sakila/entities/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/jdbc/sakila/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/jdbc/sakila/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,12 +53,16 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="com.sparta.jdbc.sakila.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sparta.jdbc.sakila.Main" />
       <module name="JDBCExample" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.sparta.jdbc.sakila.entities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -72,7 +72,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.sparta.jdbc.sakila.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -86,7 +86,7 @@
       <updated>1663763717102</updated>
       <workItem from="1663763719674" duration="3455000" />
       <workItem from="1663836064749" duration="862000" />
-      <workItem from="1663838520142" duration="5369000" />
+      <workItem from="1663838520142" duration="6442000" />
     </task>
     <servers />
   </component>
@@ -106,5 +106,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/JDBCExample$com_sparta_jdbc_sakila_Main.ic" NAME="com.sparta.jdbc.sakila.Main Coverage Results" MODIFIED="1663928184527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.sparta.jdbc.sakila.entities.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/JDBCExample$Main.ic" NAME="Main Coverage Results" MODIFIED="1663928268679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.sparta.jdbc.sakila.entities.*</FILTER>
+      <FILTER>com.*</FILTER>
+    </SUITE>
   </component>
 </project>
