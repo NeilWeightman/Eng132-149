@@ -4,9 +4,20 @@ public class Customer {
     private String firstName;
     private String lastName;
 
-    public Customer(String firstName, String lastName) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+
+    public Customer(String firstName, String lastName, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.id = id;
     }
 
     public String getFirstName() {

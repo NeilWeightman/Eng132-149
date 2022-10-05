@@ -1,11 +1,15 @@
 package com.sparta.sakilaapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.sakilaapi.entity.Customer;
 import com.sparta.sakilaapi.repo.CustomerRepo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SakilaController {
@@ -17,15 +21,48 @@ public class SakilaController {
 
     @GetMapping({"/customer", "/something"})
     public Customer getCustomer(){
-        return new Customer("Houssam Eddine", "Bououdina");
+        return new Customer("Houssam Eddine", "Bououdina", 1);
+    }
+
+    @GetMapping("customer/{id}")
+    public ResponseEntity<String> getCustomerByID(@PathVariable int id){
+        CustomerRepo repo = CustomerRepo.getInstance();
+        Customer cust = repo.get(id);
+        ObjectMapper mapper = new ObjectMapper();
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<String> result = null;
+        headers.add("content-type", "application/json");
+        if(cust != null) {
+            try {
+                result = new ResponseEntity<>(
+                        mapper.writeValueAsString(cust), headers, HttpStatus.OK);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            result = new ResponseEntity<>("{\"message\":\"Customer not found\"}",
+                    headers, HttpStatus.OK);
+        }
+        return result;
     }
 
     @PostMapping("/customer")
-    public Customer newCustomer(String firstName, String lastName){
+    @ResponseStatus(value=HttpStatus.NO_CONTENT)
+    public void newCustomer(@RequestBody Customer newCustomer){
         CustomerRepo repo = CustomerRepo.getInstance();
-        Customer c = new Customer(firstName, lastName);
-        repo.add(c);
-        System.out.println(repo);
-        return c;
+        repo.add(newCustomer);
+    }
+//    public Customer newCustomer(String firstName, String lastName, int id){
+//        CustomerRepo repo = CustomerRepo.getInstance();
+//        Customer c = new Customer(firstName, lastName, id);
+//        repo.add(c);
+//        System.out.println(repo);
+//        return c;
+//    }
+
+    @GetMapping("/customer/all")
+    public List<Customer> getAllCustomers(){
+        CustomerRepo repo = CustomerRepo.getInstance();
+        return repo.getList();
     }
 }

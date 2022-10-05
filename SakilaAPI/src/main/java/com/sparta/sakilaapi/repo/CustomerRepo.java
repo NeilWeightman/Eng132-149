@@ -21,9 +21,17 @@ public class CustomerRepo {
     }
 
     public Customer get(int index){
-        return list.get(index);
+        try {
+            return list.get(index);
+        } catch(IndexOutOfBoundsException e){
+            return null;
+        }
     }
     public String toString(){
         return list.toString();
+
+    }
+    public List<Customer> getList(){
+        return list;
     }
 }
