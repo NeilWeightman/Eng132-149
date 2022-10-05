@@ -2,8 +2,11 @@ package com.sparta.sakilaapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.sakilaapi.entity.Actor;
 import com.sparta.sakilaapi.entity.Customer;
+import com.sparta.sakilaapi.repo.ActorRepository;
 import com.sparta.sakilaapi.repo.CustomerRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,36 @@ import java.util.List;
 
 @RestController
 public class SakilaController {
+    @Autowired
+    private ActorRepository actorRepo;
+
+    @GetMapping("/actor/{id}")
+    public Actor getActorById(@PathVariable int id){
+        // need some error handling for non-existent actors
+        Actor result = actorRepo.findById(id).get();
+        return result;
+    }
+
+    @GetMapping("/actor/all")
+    public List<Actor> getAllActors(){
+        List<Actor> list = actorRepo.findAll();
+        return list;
+    }
+
+    @DeleteMapping("/actor/{id}")
+    public int deleteById(@PathVariable int id){
+        Actor actor = actorRepo.findById(id).get();
+        actorRepo.delete(actor);
+        return actor.getId();
+    }
+
+    @PutMapping("/actor/{id}/firstName/{newFirstName}")
+    public Actor updateFirstName(@PathVariable int id, @PathVariable String newFirstName){
+        Actor theActor = actorRepo.findById(id).get();
+        theActor.setFirstName(newFirstName);
+        actorRepo.save(theActor);
+        return theActor;
+    }
 
     @GetMapping("/")
     public String basic(){
