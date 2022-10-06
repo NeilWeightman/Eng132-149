@@ -2,6 +2,8 @@ package com.sparta.sakilaapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.sakilaapi.dao.ActorDAO;
+import com.sparta.sakilaapi.dto.ActorDTO;
 import com.sparta.sakilaapi.entity.Actor;
 import com.sparta.sakilaapi.entity.Customer;
 import com.sparta.sakilaapi.repo.ActorRepository;
@@ -18,6 +20,8 @@ import java.util.List;
 public class SakilaController {
     @Autowired
     private ActorRepository actorRepo;
+    @Autowired
+    private ActorDAO actorDAO;
 
     @GetMapping("/actor/{id}")
     public Actor getActorById(@PathVariable int id){
@@ -39,12 +43,11 @@ public class SakilaController {
         return actor.getId();
     }
 
-    @PutMapping("/actor/{id}/firstName/{newFirstName}")
-    public Actor updateFirstName(@PathVariable int id, @PathVariable String newFirstName){
-        Actor theActor = actorRepo.findById(id).get();
-        theActor.setFirstName(newFirstName);
-        actorRepo.save(theActor);
-        return theActor;
+    @PatchMapping("/actor/{id}/firstName/{newFirstName}")
+    public ActorDTO updateFirstName(@PathVariable int id, @PathVariable String newFirstName){
+        ActorDTO actorDTO = new ActorDTO(id, newFirstName, null);
+        actorDTO = actorDAO.update(actorDTO);
+        return actorDTO;
     }
 
     @GetMapping("/")
@@ -97,5 +100,10 @@ public class SakilaController {
     public List<Customer> getAllCustomers(){
         CustomerRepo repo = CustomerRepo.getInstance();
         return repo.getList();
+    }
+
+    @GetMapping("/actor/lastname/{lastName}")
+    public List<Actor> getActorsByLastName(@PathVariable String lastName){
+        return actorRepo.findByLastName(lastName);
     }
 }
