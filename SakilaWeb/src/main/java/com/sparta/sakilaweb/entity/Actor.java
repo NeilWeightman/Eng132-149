@@ -14,6 +14,16 @@ public class Actor {
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
 
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                '}';
+    }
+
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
