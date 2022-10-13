@@ -53,4 +53,13 @@ public class SakilaWebController {
         System.out.println("Initialising the cast list");
         return new ArrayList<>();
     }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @GetMapping("/accessDenied")
+    public String accessDenied(){
+        return "accessDenied";
+    }
 }
