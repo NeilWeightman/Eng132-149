@@ -33,8 +33,6 @@ public class SakilaConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyAuthority("ADMIN")
                 .antMatchers("/sakila/actor/*")
                 .permitAll()
-                .antMatchers("/asdad")
-                .access()
                 .anyRequest()
                 .authenticated();
         http.formLogin()
